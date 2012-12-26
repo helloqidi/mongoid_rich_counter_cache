@@ -1,5 +1,5 @@
 # encoding: utf-8
-module Lakala
+module MongoidRichCounterCache
   # Core
   module ClassUtilMixin
 
