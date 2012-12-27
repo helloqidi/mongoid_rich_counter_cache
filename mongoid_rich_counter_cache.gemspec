@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.email       = ["helloqidi@gmail.com"]
   s.homepage    = ""
   s.summary     = %q{mongoid_rich_counter_cache}
-  s.description = %q{mongoid_rich_counter_cache}
+  s.description = %q{This gem supports true filed and virtual field,and can change counter cache without Mongoid's 'destroy' and 'create' methods.}
 
   s.rubyforge_project = "mongoid_rich_counter_cache"
 

@@ -48,7 +48,7 @@ end
 ```
 
 
-###2. Visual field
+###2. Virtual field
 
 First add methods to the document where you will be accessing the counter cache from.
 ```
@@ -87,7 +87,7 @@ end
 ```
 
 
-###3. Delete without 'destroy' method
+###3. Change counter cache without Mongoid's 'destroy' and 'create' methods.
 
 First add a field to the document where you will be accessing the counter cache from.
 ```
@@ -136,4 +136,16 @@ class Art
   end
 
 end
+```
+
+When deleting one art's counter_cache
+```
+  art=Art.first
+  art.counter_cache_delete
+```
+
+When undeleting one art's counter_cache
+```
+  art=Art.first
+  art.re_counter_cache_delete
 ```
