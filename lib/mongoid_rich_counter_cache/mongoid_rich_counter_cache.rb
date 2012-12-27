@@ -23,7 +23,7 @@ module Mongoid
           operation=MongoidRichCounterCache::Operation.new({:document=>self,
                                                            :operate=>"destroy",
                                                            :name=>name,
-                                                           :field=>counter_field,
+                                                           :counter_field=>counter_field,
                                                            :if=>if_judge_m,
                                                            :destroy=>if_destroy}
                                                           )
@@ -43,7 +43,7 @@ module Mongoid
           operation=MongoidRichCounterCache::Operation.new({:document=>self,
                                                            :operate=>"create",
                                                            :name=>name,
-                                                           :field=>counter_field,
+                                                           :counter_field=>counter_field,
                                                            :if=>if_judge_m,
                                                            :destroy=>if_destroy}
                                                           )
@@ -75,7 +75,7 @@ module Mongoid
           operation=MongoidRichCounterCache::Operation.new({:document=>document,
                                                            :operate=>"create",
                                                            :name=>name,
-                                                           :field=>counter_field,
+                                                           :counter_field=>counter_field,
                                                            :if=>if_judge_m,
                                                            :destroy=>if_destroy}
                                                           )
@@ -86,7 +86,7 @@ module Mongoid
           operation=MongoidRichCounterCache::Operation.new({:document=>document,
                                                            :operate=>"destroy",
                                                            :name=>name,
-                                                           :field=>counter_field,
+                                                           :counter_field=>counter_field,
                                                            :if=>if_judge_m,
                                                            :destroy=>if_destroy}
                                                           )
