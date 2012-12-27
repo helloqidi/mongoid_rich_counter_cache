@@ -1,11 +1,11 @@
 # encoding: utf-8
 module Mongoid
-  module CounterCache
+  module RichCounterCache
     
     def self.included(base)
-      #self::COUNTER_CACHE=[]
-      @@COUNTER_CACHE=[]
       base.send :extend, ClassMethods
+      #初始化类变量
+      base.send(:counter_cache_groups)=[]
       base.send :include, InstanceMethods
     end
 
@@ -14,7 +14,7 @@ module Mongoid
       #对counter_cache记录的表和字段进行递减操作,减操作不能出现负数
       #可用于非物理删除的情况
       def counter_cache_delete
-        @@COUNTER_CACHE.each do |group|
+        self.class.counter_cache_groups.each do |group|
           name=group[:name]
           counter_field=group[:field]
           if_judge_m=group[:if]
@@ -34,7 +34,7 @@ module Mongoid
       #对counter_cache记录的表和字段进行递增操作
       #可用于撤销非物理删除的情况
       def re_counter_cache_delete
-        @@COUNTER_CACHE.each do |group|
+        self.class.counter_cache_groups.each do |group|
           name=group[:name]
           counter_field=group[:field]
           if_judge_m=group[:if]
@@ -53,6 +53,14 @@ module Mongoid
     end#InstanceMethods module
 
     module ClassMethods
+      #声明类变量
+      def counter_cache_groups
+        @counter_cache_groups
+      end
+      def counter_cache_groups=(value)
+        @counter_cache_groups=value
+      end
+
       def counter_cache(options)
         name = options[:name]
         counter_field = options[:field]
@@ -61,7 +69,7 @@ module Mongoid
         #是否执行删除方法 :destroy=>false
         if_destroy=options[:destroy]
 
-        @@COUNTER_CACHE<<{:name=>name,:field=>counter_field,:if=>if_judge_m,:destroy=>if_destroy}
+        counter_cache_groups<<{:name=>name,:field=>counter_field,:if=>if_judge_m,:destroy=>if_destroy}
 
         after_create do |document|
           operation=MongoidRichCounterCache::Operation.new({:document=>document,
