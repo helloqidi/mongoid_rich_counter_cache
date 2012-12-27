@@ -35,8 +35,8 @@ module MongoidRichCounterCache
     #执行加/减操作
     #减操作不能出现负数
     def core(num)
-      if (self.if_judge_m==nil) || (self.if_judge_m && self.document.send(self.if_judge_m))
-        relation = self.document.send(self.name)
+      if (self.if_judge_m==nil) || (self.if_judge_m && document.send(self.if_judge_m))
+        relation = document.send(self.name)
         if relation
           if relation.class.fields.keys.include?(self.counter_field)
             relation.inc(self.counter_field.to_s, num) unless num==-1 && relation.send(self.counter_field.to_s).to_i<=0
