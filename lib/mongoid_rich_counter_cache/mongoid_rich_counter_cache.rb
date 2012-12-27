@@ -5,7 +5,7 @@ module Mongoid
     def self.included(base)
       base.send :extend, ClassMethods
       #初始化类变量
-      base.send(:counter_cache_groups)=[]
+      base.counter_cache_groups=[]
       base.send :include, InstanceMethods
     end
 
